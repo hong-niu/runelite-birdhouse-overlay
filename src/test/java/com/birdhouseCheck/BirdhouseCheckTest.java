@@ -1,13 +1,13 @@
-package com.example;
+package com.birdhouseCheck;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class ExamplePluginTest
+public class BirdhouseCheckTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(ExamplePlugin.class);
+		ExternalPluginManager.loadBuiltin(BirdhouseCheckPlugin.class);
 		RuneLite.main(args);
 	}
 }
