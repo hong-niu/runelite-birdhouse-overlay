@@ -42,28 +42,33 @@ class BirdhouseColoringOverlay extends Overlay {
     }
 
     @Override
-    public Dimension render(Graphics2D graphics) {
+    public Dimension render(Graphics2D graphics)
+    {
         GameObject meadowNorth = plugin.getMeadowNorth();
         GameObject meadowSouth = plugin.getMeadowSouth();
         GameObject valleyNorth = plugin.getValleyNorth();
         GameObject valleySouth = plugin.getValleySouth();
 
-        if (!Objects.isNull(meadowNorth)) {
+        if (!Objects.isNull(meadowNorth))
+        {
             int meadowNorthState = client.getVar(BIRD_HOUSE_MEADOW_NORTH);
             birdhouseStateRenderer(meadowNorth, meadowNorthState, graphics);
         }
 
-        if (!Objects.isNull(meadowSouth)) {
+        if (!Objects.isNull(meadowSouth))
+        {
             int meadowSouthState = client.getVar(BIRD_HOUSE_MEADOW_SOUTH);
             birdhouseStateRenderer(meadowSouth, meadowSouthState, graphics);
         }
 
-        if (!Objects.isNull(valleyNorth)) {
+        if (!Objects.isNull(valleyNorth))
+        {
             int valleyNorthState = client.getVar(BIRD_HOUSE_VALLEY_NORTH);
             birdhouseStateRenderer(meadowSouth, valleyNorthState, graphics);
         }
 
-        if (!Objects.isNull(valleySouth)) {
+        if (!Objects.isNull(valleySouth))
+        {
             int valleySouthState = client.getVar(BIRD_HOUSE_VALLEY_SOUTH);
             birdhouseStateRenderer(meadowSouth, valleySouthState, graphics);
         }
@@ -71,40 +76,52 @@ class BirdhouseColoringOverlay extends Overlay {
         return null;
     }
 
-    private void birdhouseStateRenderer(GameObject birdhouse, int state, Graphics2D graphics) {
+    private void birdhouseStateRenderer(GameObject birdhouse, int state, Graphics2D graphics)
+    {
         Color unbuiltColor = config.getUnbuiltColor();
         Color unseededColor = config.getUnseededColor();
         Color seededColor = config.getSeededColor();
 
-        if (state == 0) {
+        if (state == 0)
+        {
             renderObject(birdhouse, graphics, unbuiltColor);
             log.debug(birdhouse + "rendered RED");
         }
-        else if (state % 3 == 0) {
+        else if (state % 3 == 0)
+        {
             renderObject(birdhouse, graphics, seededColor);
             log.debug(birdhouse + "rendered GREEN");
         }
-        else {
+        else
+        {
             renderObject(birdhouse, graphics, unseededColor);
             log.debug(birdhouse + "rendered YELLOW");
         }
     }
 
-    private void renderObject(GameObject object, Graphics2D graphics, Color color) {
+    private void renderObject(GameObject object, Graphics2D graphics, Color color)
+    {
         LocalPoint localLocation = client.getLocalPlayer().getLocalLocation();
-        Point mousePosition = client.getMouseCanvasPosition();
+        if (Objects.isNull(localLocation))
+        {
+            return;
+        }
 
+        Point mousePosition = client.getMouseCanvasPosition();
         LocalPoint location = object.getLocalLocation();
 
-        if (localLocation.distanceTo(location) <= MAX_DISTANCE) {
+        if (localLocation.distanceTo(location) <= MAX_DISTANCE)
+        {
             Shape objectClickbox = object.getClickbox();
-            if (objectClickbox != null) {
-
-                if (objectClickbox.contains(mousePosition.getX(), mousePosition.getY())) {
+            if (objectClickbox != null)
+            {
+                if (objectClickbox.contains(mousePosition.getX(), mousePosition.getY()))
+                {
                     graphics.setColor(color.darker());
                     log.debug("Setting Clickbox - Darker");
                 }
-                else {
+                else
+                {
                     graphics.setColor(color);
                     log.debug("Setting Clickbox - Normal");
                 }
