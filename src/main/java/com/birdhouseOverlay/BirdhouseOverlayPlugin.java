@@ -1,4 +1,4 @@
-package com.birdhouseCheck;
+package com.birdhouseOverlay;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -25,9 +25,9 @@ import static net.runelite.api.NullObjectID.NULL_30568;
 
 @Slf4j
 @PluginDescriptor(
-	name = "BirdhouseReminderOverlay"
+	name = "Birdhouse Overlay"
 )
-public class BirdhouseCheckPlugin extends Plugin
+public class BirdhouseOverlayPlugin extends Plugin
 {
 	private static final int MEADOW_NORTH = NULL_30565;
 	private static final int MEADOW_SOUTH = NULL_30566;
@@ -38,7 +38,7 @@ public class BirdhouseCheckPlugin extends Plugin
 	private Client client;
 
 	@Inject
-	private BirdhouseCheckConfig config;
+	private BirdhouseOverlayConfig config;
 
 	@Inject
 	private BirdhouseColoringOverlay overlay;
@@ -72,9 +72,9 @@ public class BirdhouseCheckPlugin extends Plugin
 	}
 
 	@Provides
-	BirdhouseCheckConfig provideConfig(ConfigManager configManager)
+	BirdhouseOverlayConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(BirdhouseCheckConfig.class);
+		return configManager.getConfig(BirdhouseOverlayConfig.class);
 	}
 
 	@Subscribe
