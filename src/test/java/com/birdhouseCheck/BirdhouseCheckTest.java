@@ -9,5 +9,6 @@ public class BirdhouseCheckTest
 	{
 		ExternalPluginManager.loadBuiltin(BirdhouseCheckPlugin.class);
 		RuneLite.main(args);
+
 	}
 }
