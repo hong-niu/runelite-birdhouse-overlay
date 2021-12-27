@@ -25,7 +25,7 @@ import static net.runelite.api.NullObjectID.NULL_30568;
 
 @Slf4j
 @PluginDescriptor(
-	name = "BirdhouseOverlay"
+	name = "BirdhouseReminderOverlay"
 )
 public class BirdhouseCheckPlugin extends Plugin
 {
