@@ -20,4 +20,4 @@ This plugin is meant to be used in conjunction with the _Timetracking_ plugin fo
 
 # Change Log
 - v1.0.0 (December 27, 2021)
-  - Initial release
+  - Initial release 
