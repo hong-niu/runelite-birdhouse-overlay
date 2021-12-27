@@ -19,6 +19,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 
 import static net.runelite.api.NullObjectID.*;
 import static net.runelite.api.ObjectID.*;
+import static net.runelite.api.VarPlayer.*;
 
 
 @Slf4j
@@ -61,6 +62,11 @@ public class BirdhouseCheckPlugin extends Plugin
 	{
 		overlayManager.add(overlay);
 		log.info("starting up! 69");
+		int stateMeadowNorth = client.getVar(BIRD_HOUSE_MEADOW_NORTH);
+		int stateMeadowSouth = client.getVar(BIRD_HOUSE_MEADOW_SOUTH);
+		int stateValleyNorth = client.getVar(BIRD_HOUSE_VALLEY_NORTH);
+		int stateValleySouth = client.getVar(BIRD_HOUSE_VALLEY_SOUTH);
+		log.info("meadow north: " + stateMeadowNorth + " | meadow south: " + stateMeadowSouth + " | valley north: " + stateValleyNorth + " | valley south: " + stateValleySouth );
 	}
 
 	@Override
@@ -84,7 +90,7 @@ public class BirdhouseCheckPlugin extends Plugin
 	public void onGameObjectSpawned(GameObjectSpawned event)
 	{
 		GameObject gameObject = event.getGameObject();
-		log.info("onGameObjectSpawned");
+		//log.info("onGameObjectSpawned");
 
 		switch (gameObject.getId())
 		{
