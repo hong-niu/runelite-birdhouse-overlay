@@ -64,13 +64,13 @@ class BirdhouseColoringOverlay extends Overlay {
         if (!Objects.isNull(valleyNorth))
         {
             int valleyNorthState = client.getVar(BIRD_HOUSE_VALLEY_NORTH);
-            birdhouseStateRenderer(meadowSouth, valleyNorthState, graphics);
+            birdhouseStateRenderer(valleyNorth, valleyNorthState, graphics);
         }
 
         if (!Objects.isNull(valleySouth))
         {
             int valleySouthState = client.getVar(BIRD_HOUSE_VALLEY_SOUTH);
-            birdhouseStateRenderer(meadowSouth, valleySouthState, graphics);
+            birdhouseStateRenderer(valleySouth, valleySouthState, graphics);
         }
 
         return null;
