@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.util.Objects;
 import javax.inject.Inject;
-
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
@@ -41,60 +40,64 @@ class BirdhouseColoringOverlay extends Overlay {
     @Override
     public Dimension render(Graphics2D graphics) {
 
-        //always works even on log in
-        if (!Objects.isNull(plugin.getYewBirdhouse1())) {
+        Color unbuiltColor = config.getUnbuiltColor();
+        Color unseededColor = config.getUnseededColor();
+        Color seededColor = config.getSeededColor();
+
+        if (!Objects.isNull(plugin.getMeadowNorth())) {
             int state = client.getVar(BIRD_HOUSE_MEADOW_NORTH);
             if (state == 0) {
-                renderObject(plugin.getYewBirdhouse1(), graphics, Color.RED);
-                log.info("meadowNORTH=RED");
-            } else if (state % 3 == 1) {
-                renderObject(plugin.getYewBirdhouse1(), graphics, Color.YELLOW);
-                log.info("meadowNORTH=YELLOW");
+                renderObject(plugin.getMeadowNorth(), graphics, unbuiltColor);
+                log.debug("meadowNORTH=RED");
             } else if (state % 3 == 0) {
-                renderObject(plugin.getYewBirdhouse1(), graphics, Color.GREEN);
-                log.info("meadowNORTH=GREEN");
+                renderObject(plugin.getMeadowNorth(), graphics, seededColor);
+                log.debug("meadowNORTH=GREEN");
+            } else {
+                renderObject(plugin.getMeadowNorth(), graphics, unseededColor);
+                log.debug("meadowNORTH=YELLOW");
             }
         }
-        //works when walk to it
-        if (!Objects.isNull(plugin.getYewBirdhouse2())) {
+
+        if (!Objects.isNull(plugin.getMeadowSouth())) {
             int state2 = client.getVar(BIRD_HOUSE_MEADOW_SOUTH);
             if (state2 == 0) {
-                renderObject(plugin.getYewBirdhouse2(), graphics, Color.RED);
-                log.info("meadowSOUTH=RED");
-            } else if (state2 % 3 == 1) {
-                renderObject(plugin.getYewBirdhouse2(), graphics, Color.YELLOW);
-                log.info("meadowSOUTH=YELLOW");
+                renderObject(plugin.getMeadowSouth(), graphics, unbuiltColor);
+                log.debug("meadowSOUTH=RED");
             } else if (state2 % 3 == 0) {
-                renderObject(plugin.getYewBirdhouse2(), graphics, Color.GREEN);
-                log.info("meadowSOUTH=RED");
+                renderObject(plugin.getMeadowSouth(), graphics, seededColor);
+                log.debug("meadowSOUTH=GREEN");
+            } else {
+                renderObject(plugin.getMeadowSouth(), graphics, unseededColor);
+                log.debug("meadowSOUTH=YELLOW");
             }
         }
 
 
-        if (!Objects.isNull(plugin.getYewBirdhouse3())) {
+        if (!Objects.isNull(plugin.getValleyNorth())) {
             int state3 = client.getVar(BIRD_HOUSE_VALLEY_NORTH);
             if (state3 == 0) {
-                renderObject(plugin.getYewBirdhouse3(), graphics, Color.RED);
-                //log.info("valleyNORTH=RED");
-            } else if (state3 % 3 == 1) {
-                renderObject(plugin.getYewBirdhouse3(), graphics, Color.YELLOW);
-                // log.info("valleyNORTH=YELLOW");
+                renderObject(plugin.getValleyNorth(), graphics, unbuiltColor);
+                log.debug("valleyNORTH=RED");
             } else if (state3 % 3 == 0) {
-                renderObject(plugin.getYewBirdhouse3(), graphics, Color.GREEN);
-                // log.info("valleyNORTH=GREEN");
+                renderObject(plugin.getValleyNorth(), graphics, seededColor);
+                log.debug("valleyNORTH=GREEN");
+            }else {
+                renderObject(plugin.getValleyNorth(), graphics, unseededColor);
+                log.debug("valleyNORTH=YELLOW");
             }
         }
-        if (!Objects.isNull(plugin.getYewBirdhouse4())) {
+
+        if (!Objects.isNull(plugin.getValleySouth())) {
             int state4 = client.getVar(BIRD_HOUSE_VALLEY_SOUTH);
             if (state4 == 0) {
-                renderObject(plugin.getYewBirdhouse4(), graphics, Color.RED);
-                //log.info("valleySOUTH=RED");
-            } else if (state4 % 3 == 1) {
-                renderObject(plugin.getYewBirdhouse4(), graphics, Color.YELLOW);
-                //            log.info("valleySOUTH=YELLOW");
+                renderObject(plugin.getValleySouth(), graphics, unbuiltColor);
+                log.debug("valleySOUTH=RED");
             } else if (state4 % 3 == 0) {
-                renderObject(plugin.getYewBirdhouse4(), graphics, Color.GREEN);
-                //            log.info("valleySOUTH=GREEN");
+                renderObject(plugin.getValleySouth(), graphics, seededColor);
+                log.debug("valleySOUTH=GREEN");
+            } else {
+                renderObject(plugin.getValleySouth(), graphics, unseededColor);
+                log.debug("valleySOUTH=YELLOW");
             }
         }
 
@@ -114,11 +117,11 @@ class BirdhouseColoringOverlay extends Overlay {
 
                 if (objectClickbox.contains(mousePosition.getX(), mousePosition.getY())) {
                     graphics.setColor(color.darker());
-                    log.info("Setting Clickbox - Darker");
+                    log.debug("Setting Clickbox - Darker");
                 }
                 else {
                     graphics.setColor(color);
-                    log.info("Setting Clickbox - Normal");
+                    log.debug("Setting Clickbox - Normal");
                 }
 
                 graphics.draw(objectClickbox);

@@ -1,19 +1,47 @@
 package com.birdhouseCheck;
 
+import net.runelite.client.config.Alpha;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
+import java.awt.*;
+
 @ConfigGroup("example")
 public interface BirdhouseCheckConfig extends Config
 {
+	@Alpha
 	@ConfigItem(
-		keyName = "greeting",
-		name = "Welcome Greeting",
-		description = "The message to show to the user when they login"
+			position = 1,
+			keyName = "emptyColor",
+			name = "Unbuilt Color",
+			description = "Color overlay of unbuilt birdhouse"
 	)
-	default String greeting()
+	default Color getUnbuiltColor()
 	{
-		return "Hello";
+		return Color.RED;
+	}
+	@Alpha
+	@ConfigItem(
+			position = 2,
+			keyName = "unseededColor",
+			name = "Unseeded color",
+			description = "Color overlay of unseeded birdhouse"
+	)
+	default Color getUnseededColor()
+	{
+//		return new Color(217, 54, 0);
+		return Color.YELLOW;
+	}
+	@Alpha
+	@ConfigItem(
+			position = 3,
+			keyName = "seededColor",
+			name = "Seeded Color",
+			description = "Color overlay of unseeded birdhouse"
+	)
+	default Color getSeededColor()
+	{
+		return Color.GREEN;
 	}
 }

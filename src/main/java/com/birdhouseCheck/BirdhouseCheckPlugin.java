@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
-import net.runelite.api.GroundObject;
 import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -18,23 +17,20 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 import static net.runelite.api.NullObjectID.*;
-import static net.runelite.api.ObjectID.*;
 import static net.runelite.api.VarPlayer.*;
 
 
 @Slf4j
 @PluginDescriptor(
-	name = "BirdhouseIndicator"
+	name = "BirdhouseOverlay"
 )
 public class BirdhouseCheckPlugin extends Plugin
 {
 
-	private static final int YEW_BIRDHOUSE1 = NULL_30565;
-	private static final int YEW_BIRDHOUSE2 = NULL_30566;
-	private static final int YEW_BIRDHOUSE3 = NULL_30567;
-	private static final int YEW_BIRDHOUSE4 = NULL_30568;
-
-
+	private static final int MEADOW_NORTH = NULL_30565;
+	private static final int MEADOW_SOUTH = NULL_30566;
+	private static final int VALLEY_NORTH = NULL_30567;
+	private static final int VALLEY_SOUTH = NULL_30568;
 
 	@Inject
 	private Client client;
@@ -46,13 +42,13 @@ public class BirdhouseCheckPlugin extends Plugin
 	private BirdhouseColoringOverlay overlay;
 
 	@Getter(AccessLevel.PACKAGE)
-	private GameObject yewBirdhouse1;
+	private GameObject meadowNorth;
 	@Getter(AccessLevel.PACKAGE)
-	private GameObject yewBirdhouse2;
+	private GameObject meadowSouth;
 	@Getter(AccessLevel.PACKAGE)
-	private GameObject yewBirdhouse3;
+	private GameObject valleyNorth;
 	@Getter(AccessLevel.PACKAGE)
-	private GameObject yewBirdhouse4;
+	private GameObject valleySouth;
 
 	@Inject
 	private OverlayManager overlayManager;
@@ -61,23 +57,20 @@ public class BirdhouseCheckPlugin extends Plugin
 	protected void startUp() throws Exception
 	{
 		overlayManager.add(overlay);
-		log.info("starting up! 69");
 		int stateMeadowNorth = client.getVar(BIRD_HOUSE_MEADOW_NORTH);
 		int stateMeadowSouth = client.getVar(BIRD_HOUSE_MEADOW_SOUTH);
 		int stateValleyNorth = client.getVar(BIRD_HOUSE_VALLEY_NORTH);
 		int stateValleySouth = client.getVar(BIRD_HOUSE_VALLEY_SOUTH);
-		log.info("meadow north: " + stateMeadowNorth + " | meadow south: " + stateMeadowSouth + " | valley north: " + stateValleyNorth + " | valley south: " + stateValleySouth );
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("shutdown");
 		overlayManager.remove(overlay);
-		yewBirdhouse1 = null;
-		yewBirdhouse2 = null;
-		yewBirdhouse3 = null;
-		yewBirdhouse4 = null;
+		meadowNorth = null;
+		meadowSouth = null;
+		valleyNorth = null;
+		valleySouth = null;
 	}
 
 	@Provides
@@ -90,22 +83,21 @@ public class BirdhouseCheckPlugin extends Plugin
 	public void onGameObjectSpawned(GameObjectSpawned event)
 	{
 		GameObject gameObject = event.getGameObject();
-		//log.info("onGameObjectSpawned");
 
 		switch (gameObject.getId())
 		{
 
-			case YEW_BIRDHOUSE1:
-				yewBirdhouse1 = gameObject;
+			case MEADOW_NORTH:
+				meadowNorth = gameObject;
 				break;
-			case YEW_BIRDHOUSE2:
-				yewBirdhouse2 = gameObject;
+			case MEADOW_SOUTH:
+				meadowSouth = gameObject;
 				break;
-			case YEW_BIRDHOUSE3:
-				yewBirdhouse3 = gameObject;
+			case VALLEY_NORTH:
+				valleyNorth = gameObject;
 				break;
-			case YEW_BIRDHOUSE4:
-				yewBirdhouse4 = gameObject;
+			case VALLEY_SOUTH:
+				valleySouth = gameObject;
 				break;
 		}
 	}
@@ -114,26 +106,24 @@ public class BirdhouseCheckPlugin extends Plugin
 	public void onGameObjectDespawned(GameObjectDespawned event)
 	{
 		GameObject gameObject = event.getGameObject();
-		log.info("onGameObjectDespawned");
 		switch (gameObject.getId())
 		{
 
-			case YEW_BIRDHOUSE1:
-				yewBirdhouse1 = null;
+			case MEADOW_NORTH:
+				meadowNorth = null;
 				break;
 
-			case YEW_BIRDHOUSE2:
-				yewBirdhouse2 = null;
+			case MEADOW_SOUTH:
+				meadowSouth = null;
 				break;
 
-			case YEW_BIRDHOUSE3:
-				yewBirdhouse3 = null;
+			case VALLEY_NORTH:
+				valleyNorth = null;
 				break;
 
-			case YEW_BIRDHOUSE4:
-				yewBirdhouse4 = null;
+			case VALLEY_SOUTH:
+				valleySouth = null;
 				break;
-
 
 		}
 	}
@@ -141,34 +131,12 @@ public class BirdhouseCheckPlugin extends Plugin
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged event)
 	{
-		log.info("onGameStateChanged");
 		if (event.getGameState() == GameState.LOADING) {
-			yewBirdhouse1 = null;
-			yewBirdhouse2 = null;
-			yewBirdhouse3 = null;
-			yewBirdhouse4 = null;
+			meadowNorth = null;
+			meadowSouth = null;
+			valleyNorth = null;
+			valleySouth = null;
 		}
-	}
-
-	/*
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
-		}
-	}
-	*/
-
-	@Subscribe
-	public void onGameTick(GameTick event)
-	{
-	}
-
-	@Subscribe
-	public void onVarbitChanged(VarbitChanged event) {
-
 	}
 
 }
