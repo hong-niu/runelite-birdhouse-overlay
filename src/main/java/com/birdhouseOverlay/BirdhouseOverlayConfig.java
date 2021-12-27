@@ -25,12 +25,11 @@ public interface BirdhouseOverlayConfig extends Config
 	@ConfigItem(
 			position = 2,
 			keyName = "unseededColor",
-			name = "Unseeded color",
+			name = "Unseeded Color",
 			description = "Color overlay of unseeded birdhouse"
 	)
 	default Color getUnseededColor()
 	{
-//		return new Color(217, 54, 0);
 		return Color.YELLOW;
 	}
 	@Alpha
