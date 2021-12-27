@@ -1,4 +1,4 @@
-package com.birdhouseCheck;
+package com.birdhouseOverlay;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -25,13 +25,13 @@ import static net.runelite.api.VarPlayer.BIRD_HOUSE_VALLEY_SOUTH;
 class BirdhouseColoringOverlay extends Overlay {
 
     private final Client client;
-    private final BirdhouseCheckConfig config;
-    private final BirdhouseCheckPlugin plugin;
+    private final BirdhouseOverlayConfig config;
+    private final BirdhouseOverlayPlugin plugin;
 
     private static final int MAX_DISTANCE = 2350;
 
     @Inject
-    private BirdhouseColoringOverlay(Client client, BirdhouseCheckPlugin plugin, BirdhouseCheckConfig config, ModelOutlineRenderer modelOutlineRenderer)
+    private BirdhouseColoringOverlay(Client client, BirdhouseOverlayPlugin plugin, BirdhouseOverlayConfig config, ModelOutlineRenderer modelOutlineRenderer)
     {
         this.plugin = plugin;
         this.client = client;

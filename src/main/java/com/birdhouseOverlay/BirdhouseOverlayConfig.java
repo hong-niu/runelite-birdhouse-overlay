@@ -1,4 +1,4 @@
-package com.birdhouseCheck;
+package com.birdhouseOverlay;
 
 import net.runelite.client.config.Alpha;
 import net.runelite.client.config.Config;
@@ -7,8 +7,8 @@ import net.runelite.client.config.ConfigItem;
 
 import java.awt.*;
 
-@ConfigGroup("example")
-public interface BirdhouseCheckConfig extends Config
+@ConfigGroup("Birdhouse Overlay")
+public interface BirdhouseOverlayConfig extends Config
 {
 	@Alpha
 	@ConfigItem(
