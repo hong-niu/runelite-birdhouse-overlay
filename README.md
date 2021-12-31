@@ -18,6 +18,9 @@ This plugin is meant to be used in conjunction with the _Timetracking_ plugin fo
 - Build birdhouse full of seeds 
 <img src="https://github.com/hong-niu/runelite-birdhouse-overlay/blob/master/imgs/birdhouse_full.png" width="300" height="300">
 
+# Feedback
+Please leave feedback [here](https://forms.gle/bDjHDX1zMPcySKUR9) or submit a Github Issue! 
+
 # Change Log
 - v1.0.0 (December 27, 2021)
   - Initial release 
