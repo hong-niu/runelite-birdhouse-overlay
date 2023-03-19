@@ -51,25 +51,25 @@ class BirdhouseColoringOverlay extends Overlay {
 
         if (!Objects.isNull(meadowNorth))
         {
-            int meadowNorthState = client.getVar(BIRD_HOUSE_MEADOW_NORTH);
+            int meadowNorthState = client.getVarbitValue(BIRD_HOUSE_MEADOW_NORTH);
             birdhouseStateRenderer(meadowNorth, meadowNorthState, graphics);
         }
 
         if (!Objects.isNull(meadowSouth))
         {
-            int meadowSouthState = client.getVar(BIRD_HOUSE_MEADOW_SOUTH);
+            int meadowSouthState = client.getVarbitValue(BIRD_HOUSE_MEADOW_SOUTH);
             birdhouseStateRenderer(meadowSouth, meadowSouthState, graphics);
         }
 
         if (!Objects.isNull(valleyNorth))
         {
-            int valleyNorthState = client.getVar(BIRD_HOUSE_VALLEY_NORTH);
+            int valleyNorthState = client.getVarbitValue(BIRD_HOUSE_VALLEY_NORTH);
             birdhouseStateRenderer(valleyNorth, valleyNorthState, graphics);
         }
 
         if (!Objects.isNull(valleySouth))
         {
-            int valleySouthState = client.getVar(BIRD_HOUSE_VALLEY_SOUTH);
+            int valleySouthState = client.getVarbitValue(BIRD_HOUSE_VALLEY_SOUTH);
             birdhouseStateRenderer(valleySouth, valleySouthState, graphics);
         }
 
